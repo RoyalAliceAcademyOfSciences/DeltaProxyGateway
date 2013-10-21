@@ -1,0 +1,25 @@
+Configuring kmod-nfnetlink.
+Configuring libnfnetlink.
+Configuring kmod-nfnetlink-queue.
+Configuring libnetfilter-queue.
+
+includes
+/opt/OpenWrt-SDK-ar71xx-for-linux-i486-gcc-4.6-linaro_uClibc-0.9.33.2/staging_dir/target-mips_r2_uClibc-0.9.33.2/usr/include
+
+libs
+/opt/OpenWrt-SDK-ar71xx-for-linux-i486-gcc-4.6-linaro_uClibc-0.9.33.2/staging_dir/target-mips_r2_uClibc-0.9.33.2/usr/lib
+
+-lnfnetlink 
+-lnetfilter_queue
+
+use libnetfilter-queue
+
+iptables -I zone_lan_forward -p tcp -m multiport --dport 80 -m geoip ! --dst-cc CN -j QUEUE
+iptables -t filter -I FORWARD -p icmp --icmp-type ttl-exceeded -j DROP
+
+iptables -D zone_lan_forward -p tcp -m multiport --dport 80 -m geoip ! --dst-cc CN -j QUEUE
+iptables -t filter -D FORWARD -p icmp --icmp-type ttl-exceeded -j DROP
+
+
+iptables -I zone_lan_forward -p tcp -m multiport --dport 80,443 -m geoip ! --dst-cc CN -j QUEUE
+iptables -D zone_lan_forward -p tcp -m multiport --dport 80,443 -m geoip ! --dst-cc CN -j QUEUE
