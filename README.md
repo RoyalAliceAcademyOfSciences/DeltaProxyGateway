@@ -8,7 +8,7 @@ libnetfilter-queue
   $ ./scripts/feeds update -a
   $ ./scripts/feeds install libnetfilter-queue
   $ pushd package
-  $ git clone https://github.com/RoyalAliceAcademyOfS ... ateway.git
+  $ git clone https://github.com/RoyalAliceAcademyOfSciences/DeltaProxyGateway.git
   $ popd
   $ make menuconfig
 ```  
